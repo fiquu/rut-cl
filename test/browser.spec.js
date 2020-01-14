@@ -1,5 +1,3 @@
-'use strict';
-
 /* Test the filter */
 describe('The fi-rut browser module', function () {
   var rut = window.rut;

@@ -1,14 +1,3 @@
-/**
- * Fi Rut
- *
- * @description Chilean RUT utils for Node.js, the browser and AngularJS.
- * @module fiRut
- * @author Final Development Studio
- * @license MIT
- */
-
-'use strict';
-
 var GROUP_REGEX = /(\d)(?=(\d{3})+\b)/g;
 var CLEAN_REGEX = /[^\dk]+/gi;
 var DIGITS_REGEX = /\D+/g;

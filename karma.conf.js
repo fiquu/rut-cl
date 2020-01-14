@@ -1,9 +1,8 @@
 // Karma configuration
 // Generated on Sat Apr 09 2016 19:51:53 GMT-0300 (CLST)
 
-module.exports = function (config) {
+module.exports = config => {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -13,12 +12,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js',
-      'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-mocks.js',
-
-      'dist/fi-rut-ng.js',
-
-      'test/angular/*.spec.js'
+      'dist/rut-cl.js'
     ],
 
     // list of files to exclude
@@ -58,5 +52,4 @@ module.exports = function (config) {
     // how many browser should be started simultaneous
     concurrency: 1
   });
-
 };

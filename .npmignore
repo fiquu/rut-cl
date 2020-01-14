@@ -4,6 +4,5 @@ src
 test
 docs
 **/.*
-bower.json
 karma.conf.js
 gulpfile.js

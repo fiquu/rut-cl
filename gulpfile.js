@@ -1,5 +1,3 @@
-'use strict';
-
 const source = require('vinyl-source-stream');
 const browserify = require('browserify');
 const buffer = require('vinyl-buffer');
@@ -50,7 +48,7 @@ const UGLIFY_OPTS = {
  *
  * @returns {Object} The gulp stream object.
  */
-function browser(min) {
+function browser (min) {
   var b = browserify({
     entries: SOURCES.BROWSER,
     standalone: 'rut',
@@ -80,7 +78,7 @@ function browser(min) {
  *
  * @returns {Object} The gulp stream object.
  */
-function angular(min) {
+function angular (min) {
   return gulp.src(SOURCES.ANGULAR)
 
     .pipe(concat('bundle.tmp.js'))

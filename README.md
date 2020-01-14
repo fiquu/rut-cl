@@ -1,4 +1,4 @@
-# fi-rut [![Build Status](https://travis-ci.org/FinalDevStudio/fi-rut.svg?branch=master)](https://travis-ci.org/FinalDevStudio/fi-rut)
+# @fiquu/rut-cl [![Build Status](https://travis-ci.org/fiquu/rut-cl.svg?branch=master)](https://travis-ci.org/fiquu/rut-cl)
 
 Chilean RUT utils for Node.js, the browser and AngularJS.
 
@@ -7,7 +7,7 @@ Chilean RUT utils for Node.js, the browser and AngularJS.
 ### Installation
 
 ```sh
-bower install --save fi-rut
+bower install --save @fiquu/rut-cl
 ```
 
 ### Usage

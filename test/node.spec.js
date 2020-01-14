@@ -1,10 +1,7 @@
-'use strict';
-
-const rut = require('../../lib');
+const rut = require('../lib');
 
 /* Test the filter */
 describe('The fi-rut module', function () {
-
   it('Exposes functions', function () {
     expect(rut.calculate).to.be.a('function');
     expect(rut.validate).to.be.a('function');
@@ -75,5 +72,4 @@ describe('The fi-rut module', function () {
   it('Formats RUT to lower case', function () {
     expect(rut.format('16.406.235-K')).to.equal('16.406.235-k');
   });
-
 });
