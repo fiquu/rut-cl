@@ -26,10 +26,11 @@
     "url": "https://github.com/fiquu/rut-cl/issues"
   },
   "devDependencies": {
-    "@fiquu/eslint-config": "^1.0.0",
+    "@fiquu/eslint-config": "^1.0.2",
     "browserify": "^16.5.0",
     "chai": "^4.2.0",
     "del": "^5.1.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-mocha": "^6.2.2",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-security": "^1.4.0",

@@ -1,7 +1,7 @@
 /* Test the filter */
-describe('The fi-rut browser module', function () {
-  var rut = window.rut;
+const rut = window.rut;
 
+describe('The fi-rut browser module', function () {
   it('Exposes functions', function () {
     expect(rut.validate).to.be.a('function');
     expect(rut.verifier).to.be.a('function');
@@ -62,5 +62,4 @@ describe('The fi-rut browser module', function () {
   it('Formats RUT to lower case', function () {
     expect(rut.format('16.406.235-K')).to.equal('16.406.235-k');
   });
-
 });
