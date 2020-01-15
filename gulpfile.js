@@ -10,11 +10,7 @@ const gulp = require('gulp');
 const del = require('del');
 
 const SOURCES = {
-  BROWSER: 'src/lib.js',
-  ANGULAR: [
-    'dist/fi-rut.js',
-    'src/angular.js'
-  ]
+  BROWSER: 'src/lib.js'
 };
 
 const UGLIFY_OPTS = {
@@ -44,12 +40,12 @@ const UGLIFY_OPTS = {
 /**
  * Builds the browser versions.
  *
- * @param {Boolean} min Whether the output should be minified.
+ * @param {boolean} min Whether the output should be minified.
  *
- * @returns {Object} The gulp stream object.
+ * @returns {object} The gulp stream object.
  */
 function browser (min) {
-  var b = browserify({
+  const b = browserify({
     entries: SOURCES.BROWSER,
     standalone: 'rut',
     debug: true
@@ -74,9 +70,9 @@ function browser (min) {
 /**
  * Builds the AngularJS versions.
  *
- * @param {Boolean} min Whether the output should be minified.
+ * @param {boolean} min Whether the output should be minified.
  *
- * @returns {Object} The gulp stream object.
+ * @returns {object} The gulp stream object.
  */
 function angular (min) {
   return gulp.src(SOURCES.ANGULAR)
@@ -118,7 +114,7 @@ gulp.task('angular:min', ['browser:min'], angular.bind(null, true));
 
 gulp.task('browser', ['angular:dev', 'angular:min']);
 
-gulp.task('docs', (done) => {
+gulp.task('docs', done => {
   return jsdox.generateForDir('./src', './docs', null, done);
 });
 

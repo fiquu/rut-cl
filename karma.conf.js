@@ -6,7 +6,7 @@ module.exports = config => {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
-      'dist/rut-cl.js'
+      'dist/cl-rut.js'
     ],
     exclude: ['test/node.js'],
     preprocessors: {},

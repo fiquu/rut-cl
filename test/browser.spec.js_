@@ -1,10 +1,8 @@
 const { expect } = require('chai');
-const clRut = require('../lib');
+const clRut = window.clRut;
 
-/* Test the filter */
-describe('The fi-rut module', function () {
+describe('The fi-rut browser module', function () {
   it('Exposes functions', function () {
-    expect(clRut.calculate).to.be.a('function');
     expect(clRut.validate).to.be.a('function');
     expect(clRut.verifier).to.be.a('function');
     expect(clRut.format).to.be.a('function');
@@ -59,15 +57,6 @@ describe('The fi-rut module', function () {
     expect(clRut.verifier('150331404')).to.equal('4');
     expect(clRut.verifier(165653548)).to.equal('8');
     expect(clRut.verifier(225426570)).to.equal('0');
-  });
-
-  it('Calculates and returns the verifier from RUT digits', function () {
-    expect(clRut.calculate('7hf23775lwk052dgfdm')).to.equal('1');
-    expect(clRut.calculate('14.602.789')).to.equal('k');
-    expect(clRut.calculate('14.450447')).to.equal('k');
-    expect(clRut.calculate('15033140-')).to.equal('4');
-    expect(clRut.calculate(16565354)).to.equal('8');
-    expect(clRut.calculate(22542657)).to.equal('0');
   });
 
   it('Formats RUT to lower case', function () {

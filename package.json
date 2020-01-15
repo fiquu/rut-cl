@@ -1,20 +1,20 @@
 {
-  "name": "@fiquu/rut-cl",
+  "name": "@fiquu/cl-rut",
   "description": "Chilean RUT utils for Node.js and the browser.",
   "main": "lib/index.js",
   "version": "1.0.0",
   "author": "fiquu <hi@fiquu.dev>",
   "license": "MIT",
-  "homepage": "https://github.com/fiquu/rut-cl#readme",
+  "homepage": "https://github.com/fiquu/cl-rut#readme",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "nyc node test/node && ./node_modules/karma/bin/karma start"
+    "test": "nyc mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fiquu/rut-cl.git"
+    "url": "git+https://github.com/fiquu/cl-rut.git"
   },
   "keywords": [
     "chilean",
@@ -23,7 +23,7 @@
     "node"
   ],
   "bugs": {
-    "url": "https://github.com/fiquu/rut-cl/issues"
+    "url": "https://github.com/fiquu/cl-rut/issues"
   },
   "devDependencies": {
     "@fiquu/eslint-config": "^1.0.2",
