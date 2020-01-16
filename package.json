@@ -10,7 +10,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "nyc mocha test/node"
+    "test": "nyc mocha test/node",
+    "postversion": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
