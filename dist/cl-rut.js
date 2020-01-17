@@ -12,183 +12,195 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * @module cl-rut
  *
- * @description This module is exposed as `window.clRut` in the browser.
- * In Node.js require it as `cl-rut`.
+ * @description Chilean RUT utilities for Node.js and the Browser.
  */
-module.exports = {
-  /**
-   * Cleans a string out of invalid RUT characters.
-   *
-   * @param {string} value The value to clean.
-   * @param {boolean} parts If the function should return an array of parts
-   * instead of the concatenated string.
-   *
-   * @returns {string|Array} The clean string or a String Array of parts
-   * if requested.
-   *
-   * @example
-   * // Returns '7237750521'
-   * rut.clean('7hf237-75lwk.052dgfdm1');
-   *
-   * // Returns ['723775052', '1']
-   * rut.clean('7hf23.775lwk.052d-gfdm1', true);
-   */
-  clean: function clean(value, parts) {
-    if (!value || String(value).length < 3) {
-      return null;
-    } // Ensure value is a string and keep only numbers and 'k' or 'K'.
+
+/**
+ * Cleans a string out of invalid RUT characters.
+ *
+ * @param {string} value The value to clean.
+ * @param {boolean} parts If the function should return an array of parts
+ * instead of the concatenated string.
+ *
+ * @returns {string|Array|null} The cleaned string, a string array of parts
+ * if requested or `null` if invalid.
+ *
+ * @example
+ * // Returns '7237750521'
+ * rut.clean('7hf237-75lwk.052dgfdm1');
+ *
+ * // Returns ['723775052', '1']
+ * rut.clean('7hf23.775lwk.052d-gfdm1', true);
+ */
+var clean = function clean(value, parts) {
+  if (!value || String(value).length < 3) {
+    return null;
+  } // Ensure value is a string and keep only numbers and 'k' or 'K'.
 
 
-    var clean = String(value).replace(/[^\dk]+/gi, '');
-    var verifier = clean.substr(-1, 1).toLowerCase();
-    var digits = clean.substr(0, clean.length - 1).replace(/\D+/g, '').toLowerCase();
+  var cleaned = String(value).replace(/[^\dk]+/gi, '');
+  var verifier = cleaned.substr(-1, 1).toLowerCase();
+  var digits = cleaned.substr(0, cleaned.length - 1).replace(/\D+/g, '').toLowerCase();
 
-    if (parts) {
-      return [digits, verifier];
-    }
-
-    return "".concat(digits).concat(verifier);
-  },
-
-  /**
-   * Formats a string as a RUT number.
-   *
-   * @param {string} value The value to format.
-   * @param {string} sep Whether to group the digits. Defaults to `true`.
-   *
-   * @returns {string} The formatted string.
-   *
-   * @example
-   * // Returns '16.992.239-k'
-   * rut.format('16992239k');
-   *
-   * // Returns '16992239-k'
-   * rut.format('16992239k', null);
-   *
-   * // Returns '16,992,239-k'
-   * rut.format('16992239k', ',');
-   */
-  format: function format(value) {
-    var sep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
-
-    if (!value || String(value).length < 3) {
-      return null;
-    }
-
-    var formatted = this.clean(value);
-
-    var _this$clean = this.clean(formatted, true),
-        _this$clean2 = _slicedToArray(_this$clean, 2),
-        digits = _this$clean2[0],
-        verifier = _this$clean2[1];
-    /* eslint-disable security/detect-unsafe-regex */
-
-
-    var grouped = digits.replace(/(\d)(?=(\d{3})+\b)/g, "$1".concat(sep));
-    /* eslint-enable security/detect-unsafe-regex */
-
-    return "".concat(grouped, "-").concat(verifier.toLowerCase());
-  },
-
-  /**
-   * Calculates the RUT verifier.
-   *
-   * @param {string} digits The RUT digits to calculate the verifier from.
-   *
-   * @returns {string} The verifier.
-   *
-   * @example
-   * // Both return 'k'
-   * rut.calculate(16992239);
-   * rut.calculate('24965101');
-   */
-  calculate: function calculate(digits) {
-    if (!digits || String(digits).length < 3) {
-      return null;
-    }
-
-    var clean = this.clean(digits);
-    /* Check if there's a value to validate */
-
-    if (!clean || String(clean).length < 1) {
-      return null;
-    }
-
-    var m = 0;
-    var r = 1;
-    /* Do the math :) */
-
-    for (; clean; clean = Math.floor(clean / 10)) {
-      r = (r + clean % 10 * (9 - m++ % 6)) % 11;
-    }
-    /* Return the calculated verifier of 'k' */
-
-
-    return r ? String(r - 1) : 'k';
-  },
-
-  /**
-   * Validates a string for a valid RUT number.
-   *
-   * @param {string} value The string to validate.
-   *
-   * @returns {boolean} If the string is a valid RUT number.
-   *
-   * @example
-   * // Returns true
-   * rut.validate('24965101k');
-   */
-  validate: function validate(value) {
-    if (!value || String(value).length < 3) {
-      return false;
-    }
-
-    var _this$clean3 = this.clean(value, true),
-        _this$clean4 = _slicedToArray(_this$clean3, 2),
-        digits = _this$clean4[0],
-        verifier = _this$clean4[1];
-
-    var calculated = this.calculate(digits);
-    return calculated === verifier;
-  },
-
-  /**
-   * Get the RUT digits only.
-   *
-   * @param {string} value The value to obtain the digits from.
-   *
-   * @returns {string} The digits if any.
-   *
-   * @example
-   * // Returns '14602789'
-   * rut.digits('14.602.789-k');
-   */
-  digits: function digits(value) {
-    if (!value || String(value).length < 3) {
-      return null;
-    }
-
-    return this.clean(value, true)[0];
-  },
-
-  /**
-   * Get the RUT verifier only.
-   *
-   * @param {string} value The value to obtain the verifier from.
-   *
-   * @returns {string} The verifier if any.
-   *
-   * @example
-   * // Returns 'k'
-   * rut.verifier('14.602.789-k');
-   */
-  verifier: function verifier(value) {
-    if (!value || String(value).length < 3) {
-      return null;
-    }
-
-    return this.clean(value, true)[1];
+  if (parts) {
+    return [digits, verifier];
   }
+
+  return "".concat(digits).concat(verifier);
+};
+/**
+ * Formats a string as a RUT number.
+ *
+ * @param {string} value The value to format.
+ * @param {string} sep What to use as group separator. Defaults to `'.'`.
+ *
+ * @returns {string|null} The formatted string or `null` if invalid.
+ *
+ * @example
+ * // Returns '16.992.239-k'
+ * rut.format('16992239k');
+ *
+ * // Returns '16992239-k'
+ * rut.format('16992239k', null);
+ *
+ * // Returns '16,992,239-k'
+ * rut.format('16992239k', ',');
+ */
+
+
+var format = function format(value) {
+  var sep = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+
+  if (!value || String(value).length < 3) {
+    return null;
+  }
+
+  var cleaned = clean(value);
+
+  var _clean = clean(cleaned, true),
+      _clean2 = _slicedToArray(_clean, 2),
+      digits = _clean2[0],
+      verifier = _clean2[1];
+  /* eslint-disable security/detect-unsafe-regex */
+
+
+  var grouped = digits.replace(/(\d)(?=(\d{3})+\b)/g, "$1".concat(sep));
+  /* eslint-enable security/detect-unsafe-regex */
+
+  return "".concat(grouped, "-").concat(verifier.toLowerCase());
+};
+/**
+ * Calculates the RUT verifier.
+ *
+ * @param {string} digits The RUT digits to calculate the verifier from.
+ *
+ * @returns {string|null} The verifier digit or `null` if invalid.
+ *
+ * @example
+ * // Both return 'k'
+ * rut.calculate(16992239);
+ * rut.calculate('24965101');
+ */
+
+
+var calculate = function calculate(digits) {
+  if (!digits || String(digits).length < 3) {
+    return null;
+  }
+
+  var cleaned = clean(digits);
+  /* Check if there's a value to validate */
+
+  if (!cleaned || String(cleaned).length < 1) {
+    return null;
+  }
+
+  var m = 0;
+  var r = 1;
+  /* Do the math :) */
+
+  for (; cleaned; cleaned = Math.floor(cleaned / 10)) {
+    r = (r + cleaned % 10 * (9 - m++ % 6)) % 11;
+  }
+  /* Return the calculated verifier of 'k' */
+
+
+  return r ? String(r - 1) : 'k';
+};
+/**
+ * Validates a string for a valid RUT number.
+ *
+ * @param {string} value The string to validate.
+ *
+ * @returns {boolean} Whether the string is a valid RUT number.
+ *
+ * @example
+ * // Returns true
+ * rut.validate('24965101k');
+ */
+
+
+var validate = function validate(value) {
+  if (!value || String(value).length < 3) {
+    return false;
+  }
+
+  var _clean3 = clean(value, true),
+      _clean4 = _slicedToArray(_clean3, 2),
+      digits = _clean4[0],
+      verifier = _clean4[1];
+
+  var calculated = calculate(digits);
+  return calculated === verifier;
+};
+/**
+ * Obtains the RUT digits only.
+ *
+ * @param {string} value The value to obtain the digits from.
+ *
+ * @returns {string|null} The digits or `null` if invalid.
+ *
+ * @example
+ * // Returns '14602789'
+ * rut.digits('14.602.789-k');
+ */
+
+
+var digits = function digits(value) {
+  if (!value || String(value).length < 3) {
+    return null;
+  }
+
+  return clean(value, true)[0];
+};
+/**
+ * Get the RUT verifier only.
+ *
+ * @param {string} value The value to obtain the verifier from.
+ *
+ * @returns {string|null} The verifier digit or `null` if invalid.
+ *
+ * @example
+ * // Returns 'k'
+ * rut.verifier('14.602.789-k');
+ */
+
+
+var verifier = function verifier(value) {
+  if (!value || String(value).length < 3) {
+    return null;
+  }
+
+  return clean(value, true)[1];
+};
+
+module.exports = {
+  calculate: calculate,
+  verifier: verifier,
+  validate: validate,
+  format: format,
+  digits: digits,
+  clean: clean
 };
 
 },{}]},{},[1])(1)
