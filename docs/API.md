@@ -1,26 +1,25 @@
 <a name="module_cl-rut"></a>
 
 ## cl-rut
-This module is exposed as `window.clRut` in the browser.
-In Node.js require it as `cl-rut`.
+Chilean RUT utilities for Node.js and the Browser.
 
 
 * [cl-rut](#module_cl-rut)
-    * [.clean(value, parts)](#module_cl-rut.clean) ⇒ <code>string</code> \| <code>Array</code>
-    * [.format(value, sep)](#module_cl-rut.format) ⇒ <code>string</code>
-    * [.calculate(digits)](#module_cl-rut.calculate) ⇒ <code>string</code>
-    * [.validate(value)](#module_cl-rut.validate) ⇒ <code>boolean</code>
-    * [.digits(value)](#module_cl-rut.digits) ⇒ <code>string</code>
-    * [.verifier(value)](#module_cl-rut.verifier) ⇒ <code>string</code>
+    * [~clean(value, parts)](#module_cl-rut..clean) ⇒ <code>string</code> \| <code>Array</code> \| <code>null</code>
+    * [~format(value, sep)](#module_cl-rut..format) ⇒ <code>string</code> \| <code>null</code>
+    * [~calculate(digits)](#module_cl-rut..calculate) ⇒ <code>string</code> \| <code>null</code>
+    * [~validate(value)](#module_cl-rut..validate) ⇒ <code>boolean</code>
+    * [~digits(value)](#module_cl-rut..digits) ⇒ <code>string</code> \| <code>null</code>
+    * [~verifier(value)](#module_cl-rut..verifier) ⇒ <code>string</code> \| <code>null</code>
 
-<a name="module_cl-rut.clean"></a>
+<a name="module_cl-rut..clean"></a>
 
-### cl-rut.clean(value, parts) ⇒ <code>string</code> \| <code>Array</code>
+### cl-rut~clean(value, parts) ⇒ <code>string</code> \| <code>Array</code> \| <code>null</code>
 Cleans a string out of invalid RUT characters.
 
-**Kind**: static method of [<code>cl-rut</code>](#module_cl-rut)  
-**Returns**: <code>string</code> \| <code>Array</code> - The clean string or a String Array of parts
-if requested.  
+**Kind**: inner method of [<code>cl-rut</code>](#module_cl-rut)  
+**Returns**: <code>string</code> \| <code>Array</code> \| <code>null</code> - The cleaned string, a string array of parts
+if requested or `null` if invalid.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -35,18 +34,18 @@ rut.clean('7hf237-75lwk.052dgfdm1');
 // Returns ['723775052', '1']
 rut.clean('7hf23.775lwk.052d-gfdm1', true);
 ```
-<a name="module_cl-rut.format"></a>
+<a name="module_cl-rut..format"></a>
 
-### cl-rut.format(value, sep) ⇒ <code>string</code>
+### cl-rut~format(value, sep) ⇒ <code>string</code> \| <code>null</code>
 Formats a string as a RUT number.
 
-**Kind**: static method of [<code>cl-rut</code>](#module_cl-rut)  
-**Returns**: <code>string</code> - The formatted string.  
+**Kind**: inner method of [<code>cl-rut</code>](#module_cl-rut)  
+**Returns**: <code>string</code> \| <code>null</code> - The formatted string or `null` if invalid.  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> | The value to format. |
-| sep | <code>string</code> | Whether to group the digits. Defaults to `true`. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | <code>string</code> |  | The value to format. |
+| sep | <code>string</code> | <code>&quot;.&quot;</code> | What to use as group separator. Defaults to `'.'`. |
 
 **Example**  
 ```js
@@ -59,13 +58,13 @@ rut.format('16992239k', null);
 // Returns '16,992,239-k'
 rut.format('16992239k', ',');
 ```
-<a name="module_cl-rut.calculate"></a>
+<a name="module_cl-rut..calculate"></a>
 
-### cl-rut.calculate(digits) ⇒ <code>string</code>
+### cl-rut~calculate(digits) ⇒ <code>string</code> \| <code>null</code>
 Calculates the RUT verifier.
 
-**Kind**: static method of [<code>cl-rut</code>](#module_cl-rut)  
-**Returns**: <code>string</code> - The verifier.  
+**Kind**: inner method of [<code>cl-rut</code>](#module_cl-rut)  
+**Returns**: <code>string</code> \| <code>null</code> - The verifier digit or `null` if invalid.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -77,13 +76,13 @@ Calculates the RUT verifier.
 rut.calculate(16992239);
 rut.calculate('24965101');
 ```
-<a name="module_cl-rut.validate"></a>
+<a name="module_cl-rut..validate"></a>
 
-### cl-rut.validate(value) ⇒ <code>boolean</code>
+### cl-rut~validate(value) ⇒ <code>boolean</code>
 Validates a string for a valid RUT number.
 
-**Kind**: static method of [<code>cl-rut</code>](#module_cl-rut)  
-**Returns**: <code>boolean</code> - If the string is a valid RUT number.  
+**Kind**: inner method of [<code>cl-rut</code>](#module_cl-rut)  
+**Returns**: <code>boolean</code> - Whether the string is a valid RUT number.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -94,13 +93,13 @@ Validates a string for a valid RUT number.
 // Returns true
 rut.validate('24965101k');
 ```
-<a name="module_cl-rut.digits"></a>
+<a name="module_cl-rut..digits"></a>
 
-### cl-rut.digits(value) ⇒ <code>string</code>
-Get the RUT digits only.
+### cl-rut~digits(value) ⇒ <code>string</code> \| <code>null</code>
+Obtains the RUT digits only.
 
-**Kind**: static method of [<code>cl-rut</code>](#module_cl-rut)  
-**Returns**: <code>string</code> - The digits if any.  
+**Kind**: inner method of [<code>cl-rut</code>](#module_cl-rut)  
+**Returns**: <code>string</code> \| <code>null</code> - The digits or `null` if invalid.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -111,13 +110,13 @@ Get the RUT digits only.
 // Returns '14602789'
 rut.digits('14.602.789-k');
 ```
-<a name="module_cl-rut.verifier"></a>
+<a name="module_cl-rut..verifier"></a>
 
-### cl-rut.verifier(value) ⇒ <code>string</code>
+### cl-rut~verifier(value) ⇒ <code>string</code> \| <code>null</code>
 Get the RUT verifier only.
 
-**Kind**: static method of [<code>cl-rut</code>](#module_cl-rut)  
-**Returns**: <code>string</code> - The verifier if any.  
+**Kind**: inner method of [<code>cl-rut</code>](#module_cl-rut)  
+**Returns**: <code>string</code> \| <code>null</code> - The verifier digit or `null` if invalid.  
 
 | Param | Type | Description |
 | --- | --- | --- |
