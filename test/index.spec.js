@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const clRut = require('../../lib');
+const clRut = require('../lib');
 
 describe('@fiquu/cl-rut (Node.js)', function () {
   describe('module', function () {
