@@ -1,5 +1,10 @@
-const { expect } = require('chai');
-const clRut = require('../lib');
+const expect = typeof window !== 'undefined'
+  ? window.chai.expect
+  : require('chai').expect;
+
+const clRut = typeof window !== 'undefined'
+  ? window.clRut
+  : require('../lib');
 
 describe('@fiquu/cl-rut (Node.js)', function () {
   describe('module', function () {
