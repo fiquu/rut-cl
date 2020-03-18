@@ -31,9 +31,9 @@
     "node": ">= 12"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@fiquu/eslint-config": "^1.0.2",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@fiquu/eslint-config": "^3.0.2",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
     "chai": "^4.2.0",
@@ -51,7 +51,7 @@
     "karma-firefox-launcher": "^1.3.0",
     "karma-mocha": "^1.3.0",
     "karma-opera-launcher": "^1.0.0",
-    "mocha": "^7.0.0",
+    "mocha": "^7.1.1",
     "nyc": "^15.0.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"

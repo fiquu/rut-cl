@@ -11,7 +11,7 @@
  * @param {boolean} parts If the function should return an array of parts
  * instead of the concatenated string.
  *
- * @returns {string|Array|null} The cleaned string, a string array of parts
+ * @returns {string|string[]|null} The cleaned string, a string array of parts
  * if requested or `null` if invalid.
  *
  * @example
@@ -21,8 +21,8 @@
  * // Returns ['723775052', '1']
  * rut.clean('7hf23.775lwk.052d-gfdm1', true);
  */
-const clean = (value, parts) => {
-  if (!value || String(value).length < 3) {
+export function clean(value: string, parts = false): string | string[] | null {
+  if (value.length < 3) {
     return null;
   }
 
@@ -58,17 +58,13 @@ const clean = (value, parts) => {
  * // Returns '16,992,239-k'
  * rut.format('16992239k', ',');
  */
-const format = (value, sep = '.') => {
+export function format(value: string, sep = '.'): string {
   if (!value || String(value).length < 3) {
     return null;
   }
 
-  const cleaned = clean(value);
-  const [digits, verifier] = clean(cleaned, true);
-
-  /* eslint-disable security/detect-unsafe-regex */
+  const [digits, verifier] = clean(value, true);
   const grouped = digits.replace(/(\d)(?=(\d{3})+\b)/g, `$1${sep}`);
-  /* eslint-enable security/detect-unsafe-regex */
 
   return `${grouped}-${verifier.toLowerCase()}`;
 };
@@ -82,30 +78,30 @@ const format = (value, sep = '.') => {
  *
  * @example
  * // Both return 'k'
- * rut.calculate(16992239);
+ * rut.calculate('16992239');
  * rut.calculate('24965101');
  */
-const calculate = digits => {
+export function calculate(digits: string): string {
   if (!digits || String(digits).length < 3) {
     return null;
   }
 
-  let cleaned = clean(digits);
+  let cleaned: number = parseInt(clean(digits) as string);
 
-  /* Check if there's a value to validate */
-  if (!cleaned || String(cleaned).length < 1) {
+  // Check if there's a value to validate
+  if (cleaned < 1) {
     return null;
   }
 
   let m = 0;
   let r = 1;
 
-  /* Do the math :) */
+  // Do the math :)
   for (; cleaned; cleaned = Math.floor(cleaned / 10)) {
     r = (r + cleaned % 10 * (9 - m++ % 6)) % 11;
   }
 
-  /* Return the calculated verifier of 'k' */
+  // Return the calculated verifier of 'k'
   return r ? String(r - 1) : 'k';
 };
 
@@ -120,8 +116,8 @@ const calculate = digits => {
  * // Returns true
  * rut.validate('24965101k');
  */
-const validate = value => {
-  if (!value || String(value).length < 3) {
+export function validate(value: string): boolean {
+  if (value.length < 3) {
     return false;
   }
 
@@ -142,8 +138,8 @@ const validate = value => {
  * // Returns '14602789'
  * rut.digits('14.602.789-k');
  */
-const digits = value => {
-  if (!value || String(value).length < 3) {
+export function digits(value: string): string {
+  if (value.length < 3) {
     return null;
   }
 
@@ -161,15 +157,15 @@ const digits = value => {
  * // Returns 'k'
  * rut.verifier('14.602.789-k');
  */
-const verifier = value => {
-  if (!value || String(value).length < 3) {
+export function verifier(value: string): string {
+  if (value.length < 3) {
     return null;
   }
 
   return clean(value, true)[1];
 };
 
-module.exports = {
+export default {
   calculate,
   verifier,
   validate,
