@@ -1,8 +1,14 @@
 {
+  "cache": true,
   "all": true,
-  "include": "lib/**/*.js",
   "reporter": [
-    "text-summary",
-    "html"
+    "html",
+    "text"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
   ]
 }

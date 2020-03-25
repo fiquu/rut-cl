@@ -1,6 +1,12 @@
-# @fiquu/cl-rut [![Build Status](https://travis-ci.org/fiquu/cl-rut.svg?branch=master)](https://travis-ci.org/fiquu/cl-rut)
+# @fiquu/cl-rut
 
-Chilean RUT utils for Node.js and the browser.
+[![Build Status](https://travis-ci.org/fiquu/cl-rut.svg?branch=master)](https://travis-ci.org/fiquu/cl-rut)
+![GitHub](https://img.shields.io/github/license/fiquu/cl-rut)
+![GitHub last commit](https://img.shields.io/github/last-commit/fiquu/cl-rut)
+![npm (scoped)](https://img.shields.io/npm/v/@fiquu/cl-rut)
+![npm](https://img.shields.io/npm/dw/@fiquu/cl-rut)
+
+Chilean RUT utils for Node.js.
 
 ## Requirements
 
@@ -15,31 +21,21 @@ npm i @fiquu/cl-rut
 ## Usage
 
 ### Node.js
-Require it into you projects as `'cl-rut'`:
+Require or import it into you projects as `'@fiquu/cl-rut'`:
 
 ```js
-const clRut = require('cl-rut');
+const clRut = require('@fiquu/cl-rut');
 ```
 
-### Browser
-You can require it and use a bundler or use the prebuilt standalone versions on the `dist` folder:
-
-```html
-<script src="../path/to/scripts/cl-rut.js"></script>
+```typescript
+import clRut  from '@fiquu/cl-rut';
 ```
-
-Or use the minified version:
-
-```html
-<script src="../path/to/scripts/cl-rut.min.js"></script>
-```
-
-And it will be available as `window.clRut`.
 
 ## Examples
 
-```javascript
-const clRut = require('fi-rut');
+```typescript
+import clRut  from '@fiquu/cl-rut';
+
 const value = '22222222';
 
 const calculated = clRut.calculate(value);

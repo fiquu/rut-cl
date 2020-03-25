@@ -1,8 +1,9 @@
-bower_components
-dist
-src
-test
+**/.eslintrc
+**/*.spec.ts
+typedoc.json
+.nyc_output
+.gitignore
+coverage
+.nycrc
 docs
-**/.*
-karma.conf.js
-gulpfile.js
+test

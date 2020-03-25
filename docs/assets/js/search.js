@@ -1,0 +1,3 @@
+var typedoc = typedoc || {};
+            typedoc.search = typedoc.search || {};
+            typedoc.search.data = {"kinds":{"64":"Function"},"rows":[{"id":0,"kind":64,"name":"clean","url":"globals.html#clean","classes":"tsd-kind-function"},{"id":1,"kind":64,"name":"format","url":"globals.html#format","classes":"tsd-kind-function"},{"id":2,"kind":64,"name":"calculate","url":"globals.html#calculate","classes":"tsd-kind-function"},{"id":3,"kind":64,"name":"validate","url":"globals.html#validate","classes":"tsd-kind-function"},{"id":4,"kind":64,"name":"digits","url":"globals.html#digits","classes":"tsd-kind-function"},{"id":5,"kind":64,"name":"verifier","url":"globals.html#verifier","classes":"tsd-kind-function"}]};

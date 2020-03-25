@@ -1,7 +1,10 @@
 {
-  "extends": "../.eslintrc",
+  "extends": "@fiquu/eslint-config/typescript",
   "env": {
     "mocha": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
   },
   "rules": {
     "max-lines-per-function": "off",

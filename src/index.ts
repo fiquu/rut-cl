@@ -22,7 +22,7 @@
  * rut.clean('7hf23.775lwk.052d-gfdm1', true);
  */
 export function clean(value: string, parts = false): string | string[] | null {
-  if (value.length < 3) {
+  if (!value || value.length < 3) {
     return null;
   }
 
@@ -38,7 +38,7 @@ export function clean(value: string, parts = false): string | string[] | null {
   }
 
   return `${digits}${verifier}`;
-};
+}
 
 /**
  * Formats a string as a RUT number.
@@ -64,10 +64,10 @@ export function format(value: string, sep = '.'): string {
   }
 
   const [digits, verifier] = clean(value, true);
-  const grouped = digits.replace(/(\d)(?=(\d{3})+\b)/g, `$1${sep}`);
+  const grouped = digits.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, sep);
 
   return `${grouped}-${verifier.toLowerCase()}`;
-};
+}
 
 /**
  * Calculates the RUT verifier.
@@ -82,14 +82,14 @@ export function format(value: string, sep = '.'): string {
  * rut.calculate('24965101');
  */
 export function calculate(digits: string): string {
-  if (!digits || String(digits).length < 3) {
+  if (!digits || digits.length < 3) {
     return null;
   }
 
   let cleaned: number = parseInt(clean(digits) as string);
 
   // Check if there's a value to validate
-  if (cleaned < 1) {
+  if (isNaN(cleaned) || cleaned < 100) {
     return null;
   }
 
@@ -103,7 +103,7 @@ export function calculate(digits: string): string {
 
   // Return the calculated verifier of 'k'
   return r ? String(r - 1) : 'k';
-};
+}
 
 /**
  * Validates a string for a valid RUT number.
@@ -117,7 +117,7 @@ export function calculate(digits: string): string {
  * rut.validate('24965101k');
  */
 export function validate(value: string): boolean {
-  if (value.length < 3) {
+  if (!value || value.length < 3) {
     return false;
   }
 
@@ -125,7 +125,7 @@ export function validate(value: string): boolean {
   const calculated = calculate(digits);
 
   return calculated === verifier;
-};
+}
 
 /**
  * Obtains the RUT digits only.
@@ -139,12 +139,12 @@ export function validate(value: string): boolean {
  * rut.digits('14.602.789-k');
  */
 export function digits(value: string): string {
-  if (value.length < 3) {
+  if (!value || value.length < 3) {
     return null;
   }
 
   return clean(value, true)[0];
-};
+}
 
 /**
  * Get the RUT verifier only.
@@ -158,12 +158,12 @@ export function digits(value: string): string {
  * rut.verifier('14.602.789-k');
  */
 export function verifier(value: string): string {
-  if (value.length < 3) {
+  if (!value || value.length < 3) {
     return null;
   }
 
   return clean(value, true)[1];
-};
+}
 
 export default {
   calculate,
