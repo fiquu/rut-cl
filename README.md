@@ -48,4 +48,4 @@ const clean = clRut.clean(value);
 
 ## Documentation
 
-Read the [library docs](docs/API.md) for the library's methods specification.
+Please see https://fiquu.github.io/cl-rut/ for more details.
