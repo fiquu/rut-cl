@@ -2,7 +2,7 @@
   "name": "@fiquu/cl-rut",
   "description": "Chilean RUT utils for Node.js and the browser.",
   "main": "lib/index.js",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "fiquu <hi@fiquu.dev>",
   "license": "MIT",
   "homepage": "https://github.com/fiquu/cl-rut#readme",
