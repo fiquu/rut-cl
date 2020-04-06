@@ -23,29 +23,29 @@
   "keywords": [
     "chilean",
     "rut",
-    "utils",
-    "node"
+    "utils"
   ],
   "bugs": {
     "url": "https://github.com/fiquu/cl-rut/issues"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@fiquu/eslint-config": "^3.0.2",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^12.12.31",
+    "@types/node": "^13.11.0",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
+    "browserify": "^16.5.1",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "mocha": "^7.1.1",
-    "nyc": "^15.0.0",
-    "ts-node": "^8.8.1",
-    "typedoc": "^0.17.3",
+    "nyc": "^15.0.1",
+    "ts-node": "^8.8.2",
+    "typedoc": "^0.17.4",
     "typescript": "^3.8.3"
   },
   "dependencies": {}
