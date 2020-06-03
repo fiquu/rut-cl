@@ -16,14 +16,14 @@ describe('@fiquu/cl-rut', function () {
 
 describe('calculate', function () {
   it('Should not calculate from an invalid value', function () {
+    expect(clRut.calculate('7hf23775lwk052dgfdm')).to.be.null;
+    expect(clRut.calculate('15033140-')).to.be.null;
     expect(clRut.calculate('asdf')).to.be.null;
   });
 
   it('Should calculate and return the verifier from a valid value', function () {
-    expect(clRut.calculate('7hf23775lwk052dgfdm')).to.equal('1');
     expect(clRut.calculate('14.602.789')).to.equal('k');
     expect(clRut.calculate('14.450447')).to.equal('k');
-    expect(clRut.calculate('15033140-')).to.equal('4');
     expect(clRut.calculate('16565354')).to.equal('8');
     expect(clRut.calculate('22542657')).to.equal('0');
   });
@@ -50,8 +50,9 @@ describe('clean', function () {
     expect(clRut.clean('21.744.998-7')).to.equal('217449987');
   });
 
-  it('Should clean an invalid value', function () {
-    expect(clRut.clean('7hf23775lwk052dgfdm1')).to.equal('7237750521');
+  it('Should not clean an invalid value', function () {
+    expect(clRut.clean('7hf23775lwk052dgfdm1')).to.be.null;
+    expect(clRut.clean('not a rut')).to.be.null;
   });
 
   it('Should not clean a short value', function () {
@@ -72,12 +73,16 @@ describe('clean', function () {
 
 describe('digits', function () {
   it('Should return the digit part of a value only', function () {
-    expect(clRut.digits('7hf23775lwk052dgfdm1')).to.equal('723775052');
     expect(clRut.digits('14450447-k')).to.equal('14450447');
     expect(clRut.digits('14.602.789-k')).to.equal('14602789');
     expect(clRut.digits('150331404')).to.equal('15033140');
     expect(clRut.digits('165653548')).to.equal('16565354');
     expect(clRut.digits('225426570')).to.equal('22542657');
+  });
+
+  it('Should not return the digits an invalid value', function () {
+    expect(clRut.digits('7hf23775lwk052dgfdm1')).to.be.null;
+    expect(clRut.digits('not a rut')).to.be.null;
   });
 
   it('Should not return the digits a short value', function () {
@@ -105,7 +110,7 @@ describe('format', function () {
   });
 
   it('Should format a random value by grouping digits and adding a dash', function () {
-    expect(clRut.format('7hf23775lwk052dgfdm1')).to.equal('723.775.052-1');
+    expect(clRut.format('7237750521')).to.equal('723.775.052-1');
   });
 
   it('Should format a value always to lower case', function () {
@@ -113,15 +118,20 @@ describe('format', function () {
     expect(clRut.format('1111456-K')).to.equal('1.111.456-k');
   });
 
-  it('Should format with a custom separator', function () {
-    expect(clRut.format('16.406.235-K', ',')).to.equal('16,406,235-k');
-    expect(clRut.format('135145270', ',')).to.equal('13,514,527-0');
-    expect(clRut.format('1111456-K', '')).to.equal('1111456-k');
-    expect(clRut.format('135145270', '')).to.equal('13514527-0');
-    expect(clRut.format('1111456-K', '++')).to.equal('1++111++456-k');
-    expect(clRut.format('135145270', '___')).to.equal('13___514___527-0');
-    expect(clRut.format('1111456-K', ' ')).to.equal('1 111 456-k');
-    expect(clRut.format('135145270', ' ')).to.equal('13 514 527-0');
+  it('Should format with digit grouping', function () {
+    expect(clRut.format('16.406.235-K', true)).to.equal('16.406.235-k');
+    expect(clRut.format('16.406.235-K')).to.equal('16.406.235-k');
+    expect(clRut.format('135145270', true)).to.equal('13.514.527-0');
+    expect(clRut.format('135145270')).to.equal('13.514.527-0');
+  });
+
+  it('Should format without digit grouping', function () {
+    expect(clRut.format('16.406.235-K', true)).to.equal('16.406.235-k');
+    expect(clRut.format('16.406.235-K', false)).to.equal('16406235-k');
+    expect(clRut.format('16.406.235-K')).to.equal('16.406.235-k');
+    expect(clRut.format('135145270', true)).to.equal('13.514.527-0');
+    expect(clRut.format('135145270', false)).to.equal('13514527-0');
+    expect(clRut.format('135145270')).to.equal('13.514.527-0');
   });
 
   it('Should not format a short value', function () {
@@ -160,8 +170,11 @@ describe('validate', function () {
 });
 
 describe('verifier', function () {
+  it('Should not return the verifier of an invalid value', function () {
+    expect(clRut.verifier('7hf23775lwk052dgfdm1')).to.be.null;
+  });
+
   it('Should return the verifier of a value only', function () {
-    expect(clRut.verifier('7hf23775lwk052dgfdm1')).to.equal('1');
     expect(clRut.verifier('14450447-k')).to.equal('k');
     expect(clRut.verifier('14.602.789-k')).to.equal('k');
     expect(clRut.verifier('150331404')).to.equal('4');
