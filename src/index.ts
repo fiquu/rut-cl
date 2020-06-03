@@ -16,20 +16,27 @@
  *
  * @example
  * // Returns '7237750521'
- * rut.clean('7hf237-75lwk.052dgfdm1');
+ * rut.clean('723.775.052-1');
+ *
+ * // Returns '7237750521'
+ * rut.clean('723.775.052-1', false);
  *
  * // Returns ['723775052', '1']
+ * rut.clean('723.775.052-1', true);
+ *
+ * // Returns null
+ * rut.clean('7hf237-75lwk.052dgfdm1');
+ *
+ * // Returns null
  * rut.clean('7hf23.775lwk.052d-gfdm1', true);
  */
 export function clean(value: string, parts = false): string | string[] | null {
-  if (!value || value.length < 3) {
+  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
     return null;
   }
 
-  // Ensure value is a string and keep only numbers and 'k' or 'K'.
-  const cleaned = String(value).replace(/[^\dk]+/gi, '');
-  const verifier = cleaned.substr(-1, 1).toLowerCase();
-  const digits = cleaned.substr(0, cleaned.length - 1)
+  const verifier = value.substr(-1, 1).toLowerCase();
+  const digits = value.substr(0, value.length - 1)
     .replace(/\D+/g, '')
     .toLowerCase();
 
@@ -44,7 +51,7 @@ export function clean(value: string, parts = false): string | string[] | null {
  * Formats a string as a RUT number.
  *
  * @param {string} value The value to format.
- * @param {string} sep What to use as group separator. Defaults to `'.'`.
+ * @param {boolean} group Whether to use digit grouping. Defaults to `true`.
  *
  * @returns {string|null} The formatted string or `null` if invalid.
  *
@@ -52,19 +59,24 @@ export function clean(value: string, parts = false): string | string[] | null {
  * // Returns '16.992.239-k'
  * rut.format('16992239k');
  *
- * // Returns '16992239-k'
- * rut.format('16992239k', null);
+ * // Returns '16.992.239-k'
+ * rut.format('16992239k', true);
  *
- * // Returns '16,992,239-k'
- * rut.format('16992239k', ',');
+ * // Returns '16992239-k'
+ * rut.format('16992239k', false);
  */
-export function format(value: string, sep = '.'): string {
-  if (!value || String(value).length < 3) {
+export function format(value: string, group = true): string {
+  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
     return null;
   }
 
   const [digits, verifier] = clean(value, true);
-  const grouped = digits.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, sep);
+
+  if (!digits || !verifier) {
+    return null;
+  }
+
+  const grouped = digits.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, group ? '.' : '');
 
   return `${grouped}-${verifier.toLowerCase()}`;
 }
@@ -82,7 +94,7 @@ export function format(value: string, sep = '.'): string {
  * rut.calculate('24965101');
  */
 export function calculate(digits: string): string {
-  if (!digits || digits.length < 3) {
+  if (!/^[\d.]{3,}$/i.test(digits)) {
     return null;
   }
 
@@ -117,7 +129,7 @@ export function calculate(digits: string): string {
  * rut.validate('24965101k');
  */
 export function validate(value: string): boolean {
-  if (!value || value.length < 3) {
+  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
     return false;
   }
 
@@ -139,11 +151,13 @@ export function validate(value: string): boolean {
  * rut.digits('14.602.789-k');
  */
 export function digits(value: string): string {
-  if (!value || value.length < 3) {
+  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
     return null;
   }
 
-  return clean(value, true)[0];
+  const [digits] = clean(value, true);
+
+  return digits;
 }
 
 /**
@@ -158,11 +172,13 @@ export function digits(value: string): string {
  * rut.verifier('14.602.789-k');
  */
 export function verifier(value: string): string {
-  if (!value || value.length < 3) {
+  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
     return null;
   }
 
-  return clean(value, true)[1];
+  const [, verifier] = clean(value, true);
+
+  return verifier;
 }
 
 export default {
