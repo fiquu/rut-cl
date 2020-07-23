@@ -6,11 +6,11 @@
 ![npm (scoped)](https://img.shields.io/npm/v/@fiquu/cl-rut)
 ![npm](https://img.shields.io/npm/dw/@fiquu/cl-rut)
 
-Chilean RUT utils for Node.js.
+Dependency-free, Chilean RUT utils for Node.js and browsers (transpiled).
 
 ## Requirements
 
-This library has been tested with **Node.js 12.x**.
+This library has been tested with **Node.js v12.x** and **NPM v6.x**.
 
 ## Installation
 
@@ -21,19 +21,20 @@ npm i @fiquu/cl-rut
 ## Usage
 
 ### Node.js
+
 Require or import it into you projects as `'@fiquu/cl-rut'`:
 
 ```js
 const clRut = require('@fiquu/cl-rut');
 ```
 
-```typescript
+```ts
 import clRut  from '@fiquu/cl-rut';
 ```
 
 ## Examples
 
-```typescript
+```ts
 import clRut  from '@fiquu/cl-rut';
 
 const value = '22222222';
@@ -48,4 +49,4 @@ const clean = clRut.clean(value);
 
 ## Documentation
 
-Please see https://fiquu.github.io/cl-rut/ for more details.
+Please see [the documentation page](https://fiquu.github.io/cl-rut/) for more details.
