@@ -16,6 +16,9 @@
  *
  * @example
  * // Returns '7237750521'
+ * rut.clean('7237750521');
+ *
+ * // Returns '7237750521'
  * rut.clean('723.775.052-1');
  *
  * // Returns '7237750521'
@@ -71,11 +74,7 @@ export function format(value: string, group = true): string {
   }
 
   const [digits, verifier] = clean(value, true);
-
-  if (!digits || !verifier) {
-    return null;
-  }
-
+  // eslint-disable-next-line security/detect-unsafe-regex
   const grouped = digits.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, group ? '.' : '');
 
   return `${grouped}-${verifier.toLowerCase()}`;
@@ -98,13 +97,7 @@ export function calculate(digits: string): string {
     return null;
   }
 
-  let cleaned: number = parseInt(clean(digits) as string);
-
-  // Check if there's a value to validate
-  if (isNaN(cleaned) || cleaned < 100) {
-    return null;
-  }
-
+  let cleaned = parseInt(clean(digits) as string, 10);
   let m = 0;
   let r = 1;
 
@@ -113,7 +106,7 @@ export function calculate(digits: string): string {
     r = (r + cleaned % 10 * (9 - m++ % 6)) % 11;
   }
 
-  // Return the calculated verifier of 'k'
+  // Return the calculated verifier or 'k'
   return r ? String(r - 1) : 'k';
 }
 
