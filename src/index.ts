@@ -1,7 +1,7 @@
 /**
  * @module cl-rut
  *
- * @description Chilean RUT utilities for Node.js and the Browser.
+ * @description Chilean RUT utilities for Node.js and browsers.
  */
 
 /**
