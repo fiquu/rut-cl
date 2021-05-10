@@ -2757,24 +2757,31 @@ img {
 			<a href="#nodejs" id="nodejs" style="color: inherit; text-decoration: none;">
 				<h3>Node.js</h3>
 			</a>
-			<p>Require or import it into you projects as <code>&#39;@fiquu/cl-rut&#39;</code>:</p>
-			<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clRut</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;@fiquu/cl-rut&quot;</span><span style="color: #000000">);</span>
-</code></pre>
-			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">clRut</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@fiquu/cl-rut&quot;</span><span style="color: #000000">;</span>
+			<p>Import it into you projects as <code>&#39;@fiquu/cl-rut&#39;</code>:</p>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">cleanParts</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">calculate</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">verifier</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">validate</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">format</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">digits</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">clean</span><span style="color: #000000">,</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fiquu/cl-rut&#039;</span><span style="color: #000000">;</span>
 </code></pre>
 			<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
 				<h2>Examples</h2>
 			</a>
-			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">clRut</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@fiquu/cl-rut&quot;</span><span style="color: #000000">;</span>
+			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">clRut</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fiquu/cl-rut&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">value</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;22222222&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">value</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;22222222&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">calculated</span><span style="color: #000000"> = </span><span style="color: #001080">clRut</span><span style="color: #000000">.</span><span style="color: #795E26">calculate</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">verififer</span><span style="color: #000000"> = </span><span style="color: #001080">clRut</span><span style="color: #000000">.</span><span style="color: #795E26">verifier</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">isValid</span><span style="color: #000000"> = </span><span style="color: #001080">clRut</span><span style="color: #000000">.</span><span style="color: #795E26">validate</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">formatted</span><span style="color: #000000"> = </span><span style="color: #001080">clRut</span><span style="color: #000000">.</span><span style="color: #795E26">format</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">digits</span><span style="color: #000000"> = </span><span style="color: #001080">clRut</span><span style="color: #000000">.</span><span style="color: #795E26">digits</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clean</span><span style="color: #000000"> = </span><span style="color: #001080">clRut</span><span style="color: #000000">.</span><span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">calculated</span><span style="color: #000000"> = </span><span style="color: #795E26">calculate</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">verififer</span><span style="color: #000000"> = </span><span style="color: #795E26">verifier</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">isValid</span><span style="color: #000000"> = </span><span style="color: #795E26">validate</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">formatted</span><span style="color: #000000"> = </span><span style="color: #795E26">format</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">parts</span><span style="color: #000000"> = </span><span style="color: #795E26">cleanParts</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">digits</span><span style="color: #000000"> = </span><span style="color: #795E26">digits</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clean</span><span style="color: #000000"> = </span><span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
 </code></pre>
 			<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
 				<h2>Documentation</h2>
@@ -2822,20 +2829,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L146">index.ts:146</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L145">index.ts:145</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Calculates the RUT verifier.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Both return &#39;k&#39;
-										calculate(&#39;16992239&#39;);
-									calculate(&#39;24965101&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -2848,6 +2848,10 @@ img {
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						<p>The verifier digit or <code>null</code> if invalid.</p>
+						<pre><code><span style="color: #008000">// Both return &#039;k&#039;</span>
+<span style="color: #795E26">calculate</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;16992239&#039;</span><span style="color: #000000">);</span>
+<span style="color: #795E26">calculate</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;24965101&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -2861,25 +2865,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L50">index.ts:50</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L49">index.ts:49</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Cleans a string out of invalid RUT characters.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns &#39;7237750521&#39;
-									clean(&#39;7237750521&#39;);</p>
-									<p>// Returns &#39;7237750521&#39;
-									clean(&#39;723.775.052-1&#39;);</p>
-									<p>// Returns &#39;7237750521&#39;
-									clean(&#39;723.775.052-1&#39;);</p>
-									<p>// Returns null
-									clean(&#39;7hf237-75lwk.052dgfdm1&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -2891,8 +2883,19 @@ img {
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						<p>The cleaned string, a string array of parts
-						if requested or <code>null</code> if invalid.</p>
+						<p>The clean string, or <code>null</code> if invalid.</p>
+						<pre><code><span style="color: #008000">// Returns &#039;7237750521&#039;</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;7237750521&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns &#039;7237750521&#039;</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;723.775.052-1&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns &#039;7237750521&#039;</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;723.775.052-1&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns null</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;7hf237-75lwk.052dgfdm1&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -2906,25 +2909,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L87">index.ts:87</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L84">index.ts:84</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Cleans a string out of invalid RUT characters.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns [&#39;723775052&#39;, &#39;1&#39;]
-									cleanParts(&#39;7237750521&#39;);</p>
-									<p>// Returns [&#39;723775052&#39;, &#39;1&#39;]
-									cleanParts(&#39;723.775.052-1&#39;);</p>
-									<p>// Returns [&#39;723775052&#39;, &#39;1&#39;]
-									cleanParts(&#39;723.775.052-1&#39;);</p>
-									<p>// Returns null
-									cleanParts(&#39;7hf237-75lwk.052dgfdm1&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -2936,8 +2927,19 @@ img {
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-						<p>The cleaned string, a string array of parts
-						if requested or <code>null</code> if invalid.</p>
+						<p>The clean string array of parts or <code>null</code> if invalid.</p>
+						<pre><code><span style="color: #008000">// Returns [&#039;723775052&#039;, &#039;1&#039;]</span>
+<span style="color: #795E26">cleanParts</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;7237750521&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns [&#039;723775052&#039;, &#039;1&#039;]</span>
+<span style="color: #795E26">cleanParts</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;723.775.052-1&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns [&#039;723775052&#039;, &#039;1&#039;]</span>
+<span style="color: #795E26">cleanParts</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;723.775.052-1&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns null</span>
+<span style="color: #795E26">cleanParts</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;7hf237-75lwk.052dgfdm1&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -2951,19 +2953,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L197">index.ts:197</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L198">index.ts:198</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Obtains the RUT digits only.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns &#39;14602789&#39;
-									digits(&#39;14.602.789-k&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -2976,6 +2972,9 @@ img {
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						<p>The digits or <code>null</code> if invalid.</p>
+						<pre><code><span style="color: #008000">// Returns &#039;14602789&#039;</span>
+<span style="color: #795E26">digits</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;14.602.789-k&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -2989,23 +2988,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L119">index.ts:119</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L117">index.ts:117</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Formats a string as a RUT number.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns &#39;16.992.239-k&#39;
-									format(&#39;16992239k&#39;);</p>
-									<p>// Returns &#39;16.992.239-k&#39;
-									format(&#39;16992239k&#39;, true);</p>
-									<p>// Returns &#39;16992239-k&#39;
-									format(&#39;16992239k&#39;, false);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -3024,6 +3013,15 @@ img {
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						<p>The formatted string or <code>null</code> if invalid.</p>
+						<pre><code><span style="color: #008000">// Returns &#039;16.992.239-k&#039;</span>
+<span style="color: #795E26">format</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;16992239k&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns &#039;16.992.239-k&#039;</span>
+<span style="color: #795E26">format</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;16992239k&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns &#039;16992239-k&#039;</span>
+<span style="color: #795E26">format</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;16992239k&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -3037,23 +3035,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L24">index.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L25">index.ts:25</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Checks if a value is a possible CL without validating it.</p>
+								<p>Checks if a value is a possible CL RUT without validating it.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns true
-									clean(&#39;723.775.052-1&#39;);</p>
-									<p>// Returns true
-									clean(&#39;7237750521&#39;);</p>
-									<p>// Returns false
-									clean(&#39;qfv23ibjfoz9&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -3066,6 +3054,15 @@ img {
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						<p>Whether the value is a possible CL.</p>
+						<pre><code><span style="color: #008000">// Returns true</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;723.775.052-1&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns true</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;7237750521&#039;</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// Returns false</span>
+<span style="color: #795E26">clean</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;qfv23ibjfoz9&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -3079,19 +3076,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L175">index.ts:175</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L175">index.ts:175</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Validates a string for a valid RUT number.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns true
-									validate(&#39;24965101k&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -3104,6 +3095,9 @@ img {
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						<p>Whether the string is a valid RUT number.</p>
+						<pre><code><span style="color: #008000">// Returns true</span>
+<span style="color: #795E26">validate</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;24965101k&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
@@ -3117,19 +3111,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/d0e3d7a/src/index.ts#L218">index.ts:218</a></li>
+								<li>Defined in <a href="https://github.com/fiquu/cl-rut/blob/f41ccb3/src/index.ts#L220">index.ts:220</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Get the RUT verifier only.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>// Returns &#39;k&#39;
-									verifier(&#39;14.602.789-k&#39;);</p>
-								</dd>
-							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -3142,6 +3130,9 @@ img {
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						<p>The verifier digit or <code>null</code> if invalid.</p>
+						<pre><code><span style="color: #008000">// Returns &#039;k&#039;</span>
+<span style="color: #795E26">verifier</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;14.602.789-k&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 					</li>
 				</ul>
 			</section>
