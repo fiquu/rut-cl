@@ -5,16 +5,10 @@
     "declaration": true,
     "strict": false,
     "module": "CommonJS",
-    "target": "ES2019",
+    "target": "ESNext",
     "outDir": "lib",
-    "lib": [
-      "ES2020"
-    ]
+    "lib": ["ESNext"]
   },
-  "exclude": [
-    "test/**/*.spec.ts"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "exclude": ["test/**/*.spec.ts"],
+  "include": ["src/**/*.ts"]
 }
