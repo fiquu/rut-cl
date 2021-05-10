@@ -10,7 +10,7 @@ Dependency-free, Chilean RUT utils for Node.js and browsers (transpiled).
 
 ## Requirements
 
-This library has been tested with **Node.js v12.x** and **NPM v6.x**.
+This library has been tested with **Node.js 12, 14** and **NPM 6**.
 
 ## Installation
 
@@ -22,29 +22,34 @@ npm i @fiquu/cl-rut
 
 ### Node.js
 
-Require or import it into you projects as `'@fiquu/cl-rut'`:
-
-```js
-const clRut = require('@fiquu/cl-rut');
-```
+Import it into you projects as `'@fiquu/cl-rut'`:
 
 ```ts
-import clRut  from '@fiquu/cl-rut';
+import {
+  cleanParts,
+  calculate,
+  verifier,
+  validate,
+  format,
+  digits,
+  clean,
+} from '@fiquu/cl-rut';
 ```
 
 ## Examples
 
 ```ts
-import clRut  from '@fiquu/cl-rut';
+import clRut from '@fiquu/cl-rut';
 
 const value = '22222222';
 
-const calculated = clRut.calculate(value);
-const verififer = clRut.verifier(value);
-const isValid = clRut.validate(value);
-const formatted = clRut.format(value);
-const digits = clRut.digits(value);
-const clean = clRut.clean(value);
+const calculated = calculate(value);
+const verifier = verifier(value);
+const isValid = validate(value);
+const formatted = format(value);
+const parts = cleanParts(value);
+const digits = digits(value);
+const clean = clean(value);
 ```
 
 ## Documentation
