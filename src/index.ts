@@ -5,6 +5,26 @@
  */
 
 /**
+ * Checks if a value is a possible CL without validating it.
+ * 
+ * @param {String} value The value to check.
+ * 
+ * @returns {Boolean} Whether the value is a possible CL.
+ * 
+ * @example
+ * // Returns true
+ * clean('723.775.052-1');
+ * 
+ * // Returns true
+ * clean('7237750521');
+ * 
+ * // Returns false
+ * clean('qfv23ibjfoz9');
+ */
+export const isClRut = (value: string): boolean =>
+  /^[\d.]{3,}-?[\dk]?$/i.test(value);
+
+/**
  * Cleans a string out of invalid RUT characters.
  *
  * @param {string} value The value to clean.
@@ -16,39 +36,67 @@
  *
  * @example
  * // Returns '7237750521'
- * rut.clean('7237750521');
+ * clean('7237750521');
  *
  * // Returns '7237750521'
- * rut.clean('723.775.052-1');
+ * clean('723.775.052-1');
  *
  * // Returns '7237750521'
- * rut.clean('723.775.052-1', false);
- *
- * // Returns ['723775052', '1']
- * rut.clean('723.775.052-1', true);
+ * clean('723.775.052-1');
  *
  * // Returns null
- * rut.clean('7hf237-75lwk.052dgfdm1');
- *
- * // Returns null
- * rut.clean('7hf23.775lwk.052d-gfdm1', true);
+ * clean('7hf237-75lwk.052dgfdm1');
  */
-export function clean(value: string, parts = false): string | string[] | null {
-  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
+export const clean = (value: string): string | null => {
+  if (!isClRut(value)) {
     return null;
   }
 
   const verifier = value.substr(-1, 1).toLowerCase();
-  const digits = value.substr(0, value.length - 1)
-    .replace(/\D+/g, '')
+  const digits = value
+    .substr(0, value.length - 1)
+    .replace(/\D+/g, "")
     .toLowerCase();
 
-  if (parts) {
-    return [digits, verifier];
+  return `${digits}${verifier}`;
+};
+
+/**
+ * Cleans a string out of invalid RUT characters.
+ *
+ * @param {string} value The value to clean.
+ * @param {boolean} parts If the function should return an array of parts
+ * instead of the concatenated string.
+ *
+ * @returns {string|string[]|null} The cleaned string, a string array of parts
+ * if requested or `null` if invalid.
+ *
+ * @example
+ * // Returns ['723775052', '1']
+ * cleanParts('7237750521');
+ *
+ * // Returns ['723775052', '1']
+ * cleanParts('723.775.052-1');
+ *
+ * // Returns ['723775052', '1']
+ * cleanParts('723.775.052-1');
+ *
+ * // Returns null
+ * cleanParts('7hf237-75lwk.052dgfdm1');
+ */
+export const cleanParts = (value: string): string[] | null => {
+  if (!isClRut(value)) {
+    return null;
   }
 
-  return `${digits}${verifier}`;
-}
+  const verifier = value.substr(-1, 1).toLowerCase();
+  const digits = value
+    .substr(0, value.length - 1)
+    .replace(/\D+/g, "")
+    .toLowerCase();
+
+  return [digits, verifier];
+};
 
 /**
  * Formats a string as a RUT number.
@@ -60,25 +108,28 @@ export function clean(value: string, parts = false): string | string[] | null {
  *
  * @example
  * // Returns '16.992.239-k'
- * rut.format('16992239k');
+ * format('16992239k');
  *
  * // Returns '16.992.239-k'
- * rut.format('16992239k', true);
+ * format('16992239k', true);
  *
  * // Returns '16992239-k'
- * rut.format('16992239k', false);
+ * format('16992239k', false);
  */
-export function format(value: string, group = true): string {
-  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
+export const format = (value: string, group = true): string => {
+  if (!isClRut(value)) {
     return null;
   }
 
-  const [digits, verifier] = clean(value, true);
+  const [digits, verifier] = cleanParts(value);
   // eslint-disable-next-line security/detect-unsafe-regex
-  const grouped = digits.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, group ? '.' : '');
+  const grouped = digits.replace(
+    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+    group ? "." : ""
+  );
 
   return `${grouped}-${verifier.toLowerCase()}`;
-}
+};
 
 /**
  * Calculates the RUT verifier.
@@ -89,10 +140,10 @@ export function format(value: string, group = true): string {
  *
  * @example
  * // Both return 'k'
- * rut.calculate('16992239');
- * rut.calculate('24965101');
+ * calculate('16992239');
+ * calculate('24965101');
  */
-export function calculate(digits: string): string {
+export const calculate = (digits: string): string => {
   if (!/^[\d.]{3,}$/i.test(digits)) {
     return null;
   }
@@ -103,12 +154,12 @@ export function calculate(digits: string): string {
 
   // Do the math :)
   for (; cleaned; cleaned = Math.floor(cleaned / 10)) {
-    r = (r + cleaned % 10 * (9 - m++ % 6)) % 11;
+    r = (r + (cleaned % 10) * (9 - (m++ % 6))) % 11;
   }
 
   // Return the calculated verifier or 'k'
-  return r ? String(r - 1) : 'k';
-}
+  return r ? String(r - 1) : "k";
+};
 
 /**
  * Validates a string for a valid RUT number.
@@ -119,18 +170,18 @@ export function calculate(digits: string): string {
  *
  * @example
  * // Returns true
- * rut.validate('24965101k');
+ * validate('24965101k');
  */
-export function validate(value: string): boolean {
-  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
+export const validate = (value: string): boolean => {
+  if (!isClRut(value)) {
     return false;
   }
 
-  const [digits, verifier] = clean(value, true);
+  const [digits, verifier] = cleanParts(value);
   const calculated = calculate(digits);
 
   return calculated === verifier;
-}
+};
 
 /**
  * Obtains the RUT digits only.
@@ -141,17 +192,17 @@ export function validate(value: string): boolean {
  *
  * @example
  * // Returns '14602789'
- * rut.digits('14.602.789-k');
+ * digits('14.602.789-k');
  */
-export function digits(value: string): string {
-  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
+export const digits = (value: string): string => {
+  if (!isClRut(value)) {
     return null;
   }
 
-  const [digits] = clean(value, true);
+  const [digits] = cleanParts(value);
 
   return digits;
-}
+};
 
 /**
  * Get the RUT verifier only.
@@ -162,23 +213,14 @@ export function digits(value: string): string {
  *
  * @example
  * // Returns 'k'
- * rut.verifier('14.602.789-k');
+ * verifier('14.602.789-k');
  */
-export function verifier(value: string): string {
-  if (!/^[\d.]{3,}-?[\dk]?$/i.test(value)) {
+export const verifier = (value: string): string => {
+  if (!isClRut(value)) {
     return null;
   }
 
-  const [, verifier] = clean(value, true);
+  const [, verifier] = cleanParts(value);
 
   return verifier;
-}
-
-export default {
-  calculate,
-  verifier,
-  validate,
-  format,
-  digits,
-  clean
 };
